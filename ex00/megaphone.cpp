@@ -6,7 +6,7 @@
 /*   By: pwojnaro <pwojnaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 22:03:51 by pwojnaro          #+#    #+#             */
-/*   Updated: 2024/11/01 22:30:20 by pwojnaro         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:32:39 by pwojnaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 		for (int i = 1; i < argc; ++i)
 		{
 			std::string arg = argv[i];
-        	for (int j = 0; j < arg.size(); ++j)
+        	for (size_t j = 0; j < arg.size(); ++j)
        		{
                 std::cout << (char)(std::toupper(arg[j]));
         	}
