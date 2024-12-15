@@ -1,9 +1,7 @@
 #include "PhoneBook.hpp"
 
-using namespace std;
-
 // Contact Class Definitions
-void Contact::setContact(string first, string last, string nick, string phone, string secret) {
+void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone, std::string secret) {
     firstName = first;
     lastName = last;
     nickname = nick;
@@ -14,17 +12,17 @@ void Contact::setContact(string first, string last, string nick, string phone, s
 void Contact::display(int index, bool summary) const {
     if (summary) {
         // Display summary
-        cout << setw(10) << index << "|"
-             << setw(10) << truncateField(firstName) << "|"
-             << setw(10) << truncateField(lastName) << "|"
-             << setw(10) << truncateField(nickname) << endl;
+        std::cout << std::setw(10) << index << "|"
+                  << std::setw(10) << truncateField(firstName) << "|"
+                  << std::setw(10) << truncateField(lastName) << "|"
+                  << std::setw(10) << truncateField(nickname) << std::endl;
     } else {
         // Display details
-        cout << "First Name: " << firstName << endl;
-        cout << "Last Name: " << lastName << endl;
-        cout << "Nickname: " << nickname << endl;
-        cout << "Phone Number: " << phoneNumber << endl;
-        cout << "Darkest Secret: " << darkestSecret << endl;
+        std::cout << "First Name: " << firstName << std::endl;
+        std::cout << "Last Name: " << lastName << std::endl;
+        std::cout << "Nickname: " << nickname << std::endl;
+        std::cout << "Phone Number: " << phoneNumber << std::endl;
+        std::cout << "Darkest Secret: " << darkestSecret << std::endl;
     }
 }
 
@@ -39,49 +37,48 @@ std::string Contact::truncateField(const std::string &field) {
     return field;
 }
 
-
 // PhoneBook Class Definitions
 PhoneBook::PhoneBook() : currentIndex(0), totalContacts(0) {}
 
 void PhoneBook::addContact() {
-    cin.ignore(); // Clear the input buffer
-    string firstName, lastName, nickname, phoneNumber, darkestSecret;
+    std::cin.ignore(); // Clear the input buffer
+    std::string firstName, lastName, nickname, phoneNumber, darkestSecret;
 
-    cout << "Enter First Name: ";
-    getline(cin, firstName);
-    cout << "Enter Last Name: ";
-    getline(cin, lastName);
-    cout << "Enter Nickname: ";
-    getline(cin, nickname);
-    cout << "Enter Phone Number: ";
-    getline(cin, phoneNumber);
-    cout << "Enter Darkest Secret: ";
-    getline(cin, darkestSecret);
+    std::cout << "Enter First Name: ";
+    std::getline(std::cin, firstName);
+    std::cout << "Enter Last Name: ";
+    std::getline(std::cin, lastName);
+    std::cout << "Enter Nickname: ";
+    std::getline(std::cin, nickname);
+    std::cout << "Enter Phone Number: ";
+    std::getline(std::cin, phoneNumber);
+    std::cout << "Enter Darkest Secret: ";
+    std::getline(std::cin, darkestSecret);
 
     if (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || darkestSecret.empty()) {
-        cout << "Error: All fields must be filled!" << endl;
+        std::cout << "Error: All fields must be filled!" << std::endl;
         return;
     }
 
     contacts[currentIndex].setContact(firstName, lastName, nickname, phoneNumber, darkestSecret);
     currentIndex = (currentIndex + 1) % 8;
-    totalContacts = min(totalContacts + 1, 8);
+    totalContacts = std::min(totalContacts + 1, 8);
 
-    cout << "Contact added successfully!" << endl;
+    std::cout << "Contact added successfully!" << std::endl;
 }
 
 void PhoneBook::searchContacts() const {
     if (totalContacts == 0) {
-        cout << "No contacts to display." << endl;
+        std::cout << "No contacts to display." << std::endl;
         return;
     }
 
     // Display headers
-    cout << setw(10) << "Index" << "|"
-         << setw(10) << "First Name" << "|"
-         << setw(10) << "Last Name" << "|"
-         << setw(10) << "Nickname" << endl;
-    cout << string(44, '-') << endl;
+    std::cout << std::setw(10) << "Index" << "|"
+              << std::setw(10) << "First Name" << "|"
+              << std::setw(10) << "Last Name" << "|"
+              << std::setw(10) << "Nickname" << std::endl;
+    std::cout << std::string(44, '-') << std::endl;
 
     // Display summaries
     for (int i = 0; i < totalContacts; ++i) {
@@ -89,12 +86,12 @@ void PhoneBook::searchContacts() const {
     }
 
     // Prompt for detailed view
-    cout << "Enter the index of the contact to view details: ";
+    std::cout << "Enter the index of the contact to view details: ";
     int index;
-    cin >> index;
+    std::cin >> index;
 
     if (index < 0 || index >= totalContacts || contacts[index].isEmpty()) {
-        cout << "Invalid index!" << endl;
+        std::cout << "Invalid index!" << std::endl;
         return;
     }
 
@@ -104,9 +101,10 @@ void PhoneBook::searchContacts() const {
 
 // Menu Function Definition
 void Menu() {
-    cout << "************ MENU *************" << endl;
-    cout << "1. Add a new Contact" << endl;
-    cout << "2. Search available Contacts" << endl;
-    cout << "3. Exit Phonebook" << endl;
-    cout << "*******************************" << endl;
+    std::cout << "************ MENU *************" << std::endl;
+    std::cout << "1. Add a new Contact" << std::endl;
+    std::cout << "2. Search available Contacts" << std::endl;
+    std::cout << "3. Exit Phonebook" << std::endl;
+    std::cout << "*******************************" << std::endl;
 }
+

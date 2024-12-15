@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pwojnaro <pwojnaro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 22:03:51 by pwojnaro          #+#    #+#             */
-/*   Updated: 2024/11/02 16:32:39 by pwojnaro         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:13:06 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+       std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
     }
     else
     {
@@ -27,9 +27,9 @@ int main(int argc, char **argv)
 			std::string arg = argv[i];
         	for (size_t j = 0; j < arg.size(); ++j)
        		{
-                std::cout << (char)(std::toupper(arg[j]));
+                std::cout << (char)(toupper(arg[j]));
         	}
-        	std::cout << "\n";
+        	std::cout << std::endl;
 		}
     }
     return 0;
