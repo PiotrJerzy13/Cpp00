@@ -1,6 +1,18 @@
 #include "PhoneBook.hpp"
 
-int main() {
+void clearScreen() 
+{
+    std::system("clear");
+}
+
+void pauseBeforeClear(int seconds) 
+{
+    std::this_thread::sleep_for(std::chrono::seconds(seconds));
+    clearScreen();
+}
+
+int main() 
+{
     PhoneBook phoneBook;
     int choice;
     bool running = true;
@@ -9,15 +21,28 @@ int main() {
         Menu();
         std::cout << "Enter your choice: ";
         std::cin >> choice;
+		        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid choice, please try again!" << std::endl;
+            pauseBeforeClear(2);
+            clearScreen();
+            continue;
+        }
 
-        switch (choice) {
+        switch (choice) 
+		{
         case 1:
             std::cout << "Adding a new contact" << std::endl;
             phoneBook.addContact();
+			pauseBeforeClear(2);
+			clearScreen();
             break;
         case 2:
             std::cout << "Searching available contacts" << std::endl;
             phoneBook.searchContacts();
+			pauseBeforeClear(4);
+			clearScreen();
             break;
         case 3:
             std::cout << "Exiting Phonebook" << std::endl;
@@ -26,6 +51,9 @@ int main() {
             break;
         default:
             std::cout << "Invalid choice, please try again!" << std::endl;
+			pauseBeforeClear(2);
+			clearScreen();
+			break;
         }
     }
 

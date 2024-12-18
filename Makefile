@@ -13,7 +13,6 @@ SRC1 = ex01/main.cpp ex01/PhoneBook.cpp
 OBJ_DIR1 = ex01/bin
 OBJ1 = $(SRC1:ex01/%.cpp=$(OBJ_DIR1)/%.o)
 
-# Targets
 all: $(NAME0) $(NAME1)
 
 # Compile program 1
@@ -34,18 +33,14 @@ $(OBJ_DIR1)/%.o: ex01/%.cpp
 	@mkdir -p $(OBJ_DIR1)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean object files and bin directories
 clean:
 	rm -rf $(OBJ_DIR0) $(OBJ_DIR1)
 
-# Full clean including executables
 fclean: clean
 	rm -f $(NAME0) $(NAME1)
 
-# Rebuild everything
 re: fclean all
 
-# Custom rules for specific programs
 0: $(NAME0)
 
 1: $(NAME1)

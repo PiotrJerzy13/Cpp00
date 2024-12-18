@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 
-void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone, std::string secret) {
+void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone, std::string secret) 
+{
     firstName = first;
     lastName = last;
     nickname = nick;
@@ -8,7 +9,8 @@ void Contact::setContact(std::string first, std::string last, std::string nick, 
     darkestSecret = secret;
 }
 
-void Contact::display(int index, bool summary) const {
+void Contact::display(int index, bool summary) const 
+{
     if (summary) 
 	{
         std::cout << std::setw(10) << index << "|"
@@ -24,11 +26,6 @@ void Contact::display(int index, bool summary) const {
         std::cout << "Phone Number: " << phoneNumber << std::endl;
         std::cout << "Darkest Secret: " << darkestSecret << std::endl;
     }
-}
-
-bool Contact::isEmpty() const 
-{
-    return firstName.empty();
 }
 
 std::string Contact::truncateField(const std::string &field) 
@@ -56,7 +53,8 @@ void PhoneBook::addContact()
     std::cout << "Enter Darkest Secret: ";
     std::getline(std::cin, darkestSecret);
 
-    if (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || darkestSecret.empty()) {
+    if (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || darkestSecret.empty()) 
+	{
         std::cout << "Error: All fields must be filled!" << std::endl;
         return;
     }
@@ -64,13 +62,12 @@ void PhoneBook::addContact()
     contacts[currentIndex].setContact(firstName, lastName, nickname, phoneNumber, darkestSecret);
     currentIndex = (currentIndex + 1) % 8;
     totalContacts = std::min(totalContacts + 1, 8);
-
-    std::cout << "Contact added successfully!" << std::endl;
 }
 
 void PhoneBook::searchContacts() const 
 {
-    if (totalContacts == 0) {
+    if (totalContacts == 0) 
+	{
         std::cout << "No contacts to display." << std::endl;
         return;
     }
@@ -81,28 +78,31 @@ void PhoneBook::searchContacts() const
               << std::setw(10) << "Nickname" << std::endl;
     std::cout << std::string(44, '-') << std::endl;
 
-    for (int i = 0; i < totalContacts; ++i) {
-        contacts[i].display(i, true);
+    for (int i = 0; i < totalContacts; ++i) 
+	{
+        contacts[i].display(i + 1, true);
     }
 
     std::cout << "Enter the index of the contact to view details: ";
     int index;
     std::cin >> index;
 
-    if (index < 0 || index >= totalContacts || contacts[index].isEmpty()) {
+    if (std::cin.fail() || index < 1 || index > totalContacts) 
+	{
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Invalid index!" << std::endl;
         return;
     }
-
-    contacts[index].display();
+    contacts[index - 1].display();
 }
 
 void Menu() 
 {
-    std::cout << "************ MENU *************" << std::endl;
-    std::cout << "1. Add a new Contact" << std::endl;
-    std::cout << "2. Search available Contacts" << std::endl;
-    std::cout << "3. Exit Phonebook" << std::endl;
-    std::cout << "*******************************" << std::endl;
+    std::cout << "************ MENU **************" << std::endl;
+    std::cout << "* 1. Add a new Contact         *" << std::endl;
+    std::cout << "* 2. Search Contacts           *" << std::endl;
+    std::cout << "* 3. Exit Phonebook            *" << std::endl;
+    std::cout << "********************************" << std::endl;
 }
 
