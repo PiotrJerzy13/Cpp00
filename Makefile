@@ -4,12 +4,14 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 # Program 1 (megaphone)
 NAME0 = megaphone
 SRC0 = ex00/megaphone.cpp
-OBJ0 = $(SRC0:.cpp=.o)
+OBJ_DIR0 = ex00/bin
+OBJ0 = $(OBJ_DIR0)/megaphone.o
 
 # Program 2 (PhoneBook)
 NAME1 = PhoneBook
 SRC1 = ex01/main.cpp ex01/PhoneBook.cpp
-OBJ1 = $(SRC1:.cpp=.o)
+OBJ_DIR1 = ex01/bin
+OBJ1 = $(SRC1:ex01/%.cpp=$(OBJ_DIR1)/%.o)
 
 # Targets
 all: $(NAME0) $(NAME1)
@@ -22,17 +24,25 @@ $(NAME0): $(OBJ0)
 $(NAME1): $(OBJ1)
 	$(CC) $(CFLAGS) $(OBJ1) -o $(NAME1)
 
-# Object files for program 1
-%.o: %.cpp
+# Rule to compile .cpp to .o for Program 1
+$(OBJ_DIR0)/%.o: ex00/%.cpp
+	@mkdir -p $(OBJ_DIR0)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean object files and executables
-clean:
-	rm -f $(OBJ0) $(OBJ1)
+# Rule to compile .cpp to .o for Program 2
+$(OBJ_DIR1)/%.o: ex01/%.cpp
+	@mkdir -p $(OBJ_DIR1)
+	$(CC) $(CFLAGS) -c $< -o $@
 
+# Clean object files and bin directories
+clean:
+	rm -rf $(OBJ_DIR0) $(OBJ_DIR1)
+
+# Full clean including executables
 fclean: clean
 	rm -f $(NAME0) $(NAME1)
 
+# Rebuild everything
 re: fclean all
 
 # Custom rules for specific programs
