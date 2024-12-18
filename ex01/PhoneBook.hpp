@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <thread>
+#include <ctime>
 
 
 class Contact 
@@ -19,7 +19,6 @@ private:
 public:
     void setContact(std::string first, std::string last, std::string nick, std::string phone, std::string secret);
     void display(int index = -1, bool summary = false) const;
-
 
 private:
     static std::string truncateField(const std::string &field);
@@ -39,5 +38,7 @@ public:
 };
 
 void Menu();
+void pauseBeforeClear(int seconds);
+void clearScreen();
 
 #endif

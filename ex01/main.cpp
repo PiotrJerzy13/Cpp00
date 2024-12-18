@@ -1,16 +1,5 @@
 #include "PhoneBook.hpp"
 
-void clearScreen() 
-{
-    std::system("clear");
-}
-
-void pauseBeforeClear(int seconds) 
-{
-    std::this_thread::sleep_for(std::chrono::seconds(seconds));
-    clearScreen();
-}
-
 int main() 
 {
     PhoneBook phoneBook;

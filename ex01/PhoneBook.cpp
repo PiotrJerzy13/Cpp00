@@ -97,6 +97,20 @@ void PhoneBook::searchContacts() const
     contacts[index - 1].display();
 }
 
+void clearScreen() 
+{
+    std::system("clear");
+}
+
+void pauseBeforeClear(int seconds) 
+{
+    clock_t start_time = clock();
+    while ((clock() - start_time) / CLOCKS_PER_SEC < static_cast<unsigned long>(seconds))
+	{
+    }
+    clearScreen();
+}
+
 void Menu() 
 {
     std::cout << "************ MENU **************" << std::endl;
