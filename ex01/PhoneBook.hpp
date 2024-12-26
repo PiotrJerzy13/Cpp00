@@ -17,7 +17,7 @@ private:
     std::string darkestSecret;
 
 public:
-    void setContact(std::string first, std::string last, std::string nick, std::string phone, std::string secret);
+    void setContact(const std::string& first, const std::string& last, const std::string& nick, const std::string& phone, const std::string& secret);
     void display(int index = -1, bool summary = false) const;
 
 private:

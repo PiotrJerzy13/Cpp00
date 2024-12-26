@@ -1,6 +1,6 @@
 #include "PhoneBook.hpp"
 
-void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone, std::string secret) 
+void Contact::setContact(const std::string& first, const std::string& last, const std::string& nick, const std::string& phone, const std::string& secret) 
 {
     firstName = first;
     lastName = last;
