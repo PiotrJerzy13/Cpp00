@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <string>
 #include <ctime>
+#include <cstdlib>
 
 
 class Contact 
@@ -30,15 +31,18 @@ private:
     Contact contacts[8];
     int currentIndex;
     int totalContacts;
+	bool familyAdded;
 
 public:
     PhoneBook();
     void addContact();
     void searchContacts() const;
+	void addFamily();
 };
 
 void Menu();
 void pauseBeforeClear(int seconds);
-void clearScreen();
+bool clearScreen();
+bool handleEOF();
 
 #endif
